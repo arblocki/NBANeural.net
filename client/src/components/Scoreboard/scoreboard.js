@@ -1,24 +1,22 @@
-import React from 'react'
+import React from 'react';
 import './scoreboard.css';
+import ProjectedGame from './ProjectedGame.js';
+import FinalGame from './FinalGame.js';
 
 const Scoreboard = ({ games }) => {
+  // console.log(games)
   return (
-    <div>
-      {games.map((game) => (
-        <div className="card game" key={game._id}>
-          <div className="card-body">
-            <h5 className="card-title">{game.awayTeam.abbreviation + ' - ' + game.homeTeam.abbreviation}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">{game.score.away + ' - ' + game.score.home}</h6>
-            <center><p className="card-text">{
-                game.spread === 0 
-                    ? 'PK' 
-                : game.spread < 0 
-                    ? game.homeTeam.abbreviation + ' ' + game.spread 
-                    : game.awayTeam.abbreviation + ' ' + (-1 * game.spread)
-            }</p></center>
-          </div>
+    <div class="container" id="scoreboard">
+      <div class="row">
+        <div class="col">
+          <h2>Scores</h2>
+          {games.map((game) => (
+            (game.score.away === -1 && game.score.home === -1)
+              ? ProjectedGame(game)
+              : FinalGame(game)
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   )
 };

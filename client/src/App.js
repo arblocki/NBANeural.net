@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Scoreboard from './components/Scoreboard/ScoreBoard.js';
+import Navbar from './components/Navbar/Navbar.js'; 
+import PageHeader from './components/PageHeader/PageHeader.js';
+import Scoreboard from './components/Scoreboard/Scoreboard.js';
 // import axios from 'axios';
 //import { games } from './data';
 
@@ -11,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getDailyGames('20200311');
+    this.getDailyGames('20191102');
   }
 
   getDailyGames(date) {
@@ -29,7 +31,13 @@ class App extends Component {
 
   render () {
     return (
-      <Scoreboard games={this.state.dailyGames}/>
+      <div>
+        <Navbar/>
+        <PageHeader/>
+        {this.state.dailyGames.length === 0
+          ? null
+          : <Scoreboard games={this.state.dailyGames}/>}
+      </div>
     );
   }
 }

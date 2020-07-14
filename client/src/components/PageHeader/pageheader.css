@@ -1,0 +1,19 @@
+@media (min-width: 768px) {
+  .col.title-info {
+    padding: 4em;
+  }
+}
+
+@media (min-width: 768px) {
+  .record-col {
+    padding: 3em 0;
+  }
+}
+
+.record-col {
+  padding: 1.5em;
+}
+
+.col.title-info {
+  padding: 2em;
+}

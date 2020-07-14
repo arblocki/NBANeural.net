@@ -14,7 +14,7 @@ const router = express.Router();
 // this is our MongoDB database
 var MongoClient = require('mongodb').MongoClient;
 const dbRoute =
-  'mongodb+srv://<username>:<password>@nba-data.nftax.azure.mongodb.net/NBA_ML?retryWrites=true&w=majority';
+  'mongodb+srv://web:NBAMachineLearning@nba-data.nftax.azure.mongodb.net/NBA_ML?retryWrites=true&w=majority';
 
 // connects our back end code with the database
 MongoClient.connect(dbRoute, { useUnifiedTopology: true })
