@@ -17,3 +17,9 @@
 .col.title-info {
   padding: 2em;
 }
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .record {
+    font-size: 2rem;
+  }
+}

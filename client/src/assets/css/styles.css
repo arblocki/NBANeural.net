@@ -1,4 +1,6 @@
 
+
+/* 
 .scorecard {
   margin-bottom: 1em;
   margin-top: 1em;
@@ -16,7 +18,7 @@
   width: 20%;
   height: inherit;
   overflow: hidden;
-  /*position: relative;*/
+  position: relative;
   display: inline-block;
 }
 
@@ -30,7 +32,7 @@
 
 .team-logo {
   position: absolute;
-  /*width: 200;*/
+  width: 200;
   height: 100px;
   top: -9999px;
   bottom: -9999px;
@@ -136,4 +138,4 @@
   .proj-score {
     font-size: 1.25rem;
   }
-}
+} */

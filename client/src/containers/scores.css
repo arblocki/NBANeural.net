@@ -12,40 +12,17 @@
   }
 }
 
-.imageContainer {
-  width: 20%;
-  height: inherit;
-  overflow: hidden;
-  /*position: relative;*/
-  display: inline-block;
-}
-
-.image-container {
-  width: 20%;
-  height: inherit;
-  overflow: hidden;
-  position: relative;
-  display: inline-block;
-}
-
 .team-logo {
-  position: absolute;
-  /*width: 200;*/
-  height: 100px;
-  top: -9999px;
-  bottom: -9999px;
-  left: -9999px;
-  right: -9999px;
-  margin: auto;
+  width: 200%;
+  position: relative;
+  left: -50%;
+  /* margin: auto; */
 }
 
-.score-info {
-  width: 59%;
-  margin-top: 0.75rem;
-}
-
-.score {
-  height: 100px;
+.ORL {
+  left: -69%;
+  height: 60%;
+  margin: 20% 0 0 0;
 }
 
 .h5toh4 {
@@ -60,12 +37,6 @@
 @media (min-width: 992px) {
   .h5toh4 {
     font-size: 1.5rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .score-info {
-    margin-top: 0;
   }
 }
 
@@ -84,11 +55,11 @@
   }
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   .team-logo {
     height: 150px;
   }
-}
+} */
 
 .float-left.spread {
   margin-left: 4%;
@@ -138,14 +109,29 @@
   }
 }
 
-.spread.green {
-    color: green;
+.green {
+  color: green;
 }
 
-.spread.grey {
-    color: grey;
+.grey {
+  color: grey;
 }
 
-.spread.red {
-    color: red;
+.red {
+  color: red;
+}
+
+.btn {
+  color: white;
+  background-color: black;
+  display: flex;
+  float: right;
+}
+
+.btn:hover {
+  color: lightblue;
+}
+
+.no-games {
+  margin-top: 65px;
 }

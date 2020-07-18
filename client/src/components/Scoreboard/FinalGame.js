@@ -68,16 +68,16 @@ const FinalGame = (game) => {
   return (
     <div className="card border-dark d-inline-flex scorecard">
       <div className="card-body">
-        <div className="score">
-          <div className="float-left image-container">
-            <img className="team-logo" src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
+        <div className="row">
+          <div className="col-3">
+            <img className={"team-logo " + game.awayTeam.abbreviation} src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
           </div>
-          <div className="d-inline-block score-info">
+          <div className="col-6">
             <p className="score-type h5toh4">Final Score</p>
             <p className="score-num">{game.score.away + ' - ' + game.score.home}</p>
           </div>
-          <div className="float-right image-container">
-            <img className="team-logo" src={homeLogoLink} loading="eager" alt={game.homeTeam.abbreviation}></img>
+          <div className="col-3">
+            <img className={"team-logo " + game.homeTeam.abbreviation} src={homeLogoLink} loading="eager" alt={game.homeTeam.abbreviation}></img>
           </div>
         </div>
         <div className="row projected-row">
