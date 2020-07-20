@@ -4,12 +4,19 @@ const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-// import { getConfig } from './config.js';
+const path = require('path');
 
 const API_PORT = 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/public'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+  });
+}
 
 // this is our MongoDB database
 var MongoClient = require('mongodb').MongoClient;

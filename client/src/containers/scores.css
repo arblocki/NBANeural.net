@@ -20,9 +20,16 @@
 }
 
 .ORL {
-  left: -69%;
   height: 60%;
   margin: 20% 0 0 0;
+}
+
+.ORL.home {
+  left: -60%;
+}
+
+.ORL.away {
+  left: -35%;
 }
 
 .h5toh4 {

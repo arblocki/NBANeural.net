@@ -1,68 +1,56 @@
 import React from 'react';
 
+const formatNeutralPickStr = (game) => {
+  const pickStr = (game.spread < 0) 
+        ? game.homeTeam.abbreviation + ' ' + game.spread
+        : game.awayTeam.abbreviation + ' -' + game.spread;
+  return pickStr;
+}
+
+const formatActionPickStr = (game) => {
+  var pickStr = '';
+  if (game.spread < 0) {
+    if (game.bet.team === game.homeTeam.abbreviation) {
+      pickStr = game.homeTeam.abbreviation + ' ' + game.spread;
+    } else {
+      pickStr = game.awayTeam.abbreviation + ' +' + (-1 * game.spread);
+    }
+  } else {
+    if (game.bet.team === game.homeTeam.abbreviation) {
+      pickStr = game.homeTeam.abbreviation + ' +' + game.spread;
+    } else {
+      pickStr = game.awayTeam.abbreviation + ' -' + game.spread;
+    }
+  }
+  return pickStr;
+}
+
 const FinalGame = (game) => {
   
   const awayLogoLink = '/logos/' + game.awayTeam.abbreviation + '.svg';
   const homeLogoLink = '/logos/' + game.homeTeam.abbreviation + '.svg';
 
-  const threshold = 5.5;
-  const threshold_2u = 8;
-  const threshold_3u = 10;
-
-  const projectedSpread = game.predScore.away - game.predScore.home;
-  const actualScoreDiff = game.score.away - game.score.home;
-  var pickStr = '';
   var pickStyle = '';
-  var pickResult = '';
-  // Decide if a pick is being made
-  if (Math.abs(projectedSpread - game.spread) > threshold) {  // If a pick is being made
-    pickResult = '1 Unit ';
+  var resultStr = '';
+  var pickStr = '';
 
-    // Determine how many units for the bet 
-    if (Math.abs(projectedSpread - game.spread) > threshold_2u) {
-      pickResult = '2 Unit ';
-    }
-    if (Math.abs(projectedSpread - game.spread) > threshold_3u) {
-      pickResult = '3 Unit ';
-    }
-
-    // Determine if pick was correct 
-    if (projectedSpread < game.spread && actualScoreDiff < game.spread) {
-      pickStyle = 'green';
-      pickResult += 'WIN';
-    } else if (projectedSpread > game.spread && actualScoreDiff > game.spread) {
-      pickStyle = 'green';
-      pickResult += 'WIN';
-    } else if (actualScoreDiff === game.spread) {
-      pickStyle = 'grey';
-      pickResult += 'PUSH';
-    } else {
-      pickStyle = 'red';
-      pickResult += 'LOSS';
-    }
-
-    if (projectedSpread < game.spread) {  // If the home team is being picked
-      if (game.spread < 0) {  // If the home team is favored
-        pickStr = game.homeTeam.abbreviation + ' ' + game.spread;
-      } else {
-        pickStr = game.homeTeam.abbreviation + ' +' + game.spread;
-      }
-    } else {  // If the away team is being picked
-      if (game.spread < 0) {  // If the home team is favored
-        pickStr = game.awayTeam.abbreviation + ' +' + (-1 * game.spread);
-      } else {
-        pickStr = game.awayTeam.abbreviation + ' -' + game.spread;
-      }
-    }
-
-  } else {
+  if (game.bet.units === 0) {
     pickStyle = 'grey';
-    pickResult = 'No Action';
-    if (game.spread < 0) {
-      pickStr = game.homeTeam.abbreviation + ' ' + game.spread;
-    } else {
-      pickStr = game.awayTeam.abbreviation + ' -' + game.spread;
-    }
+    resultStr = 'No Action';
+    pickStr = (game.spread === 0) 
+      ? 'PK' 
+      : formatNeutralPickStr(game); 
+  } else {
+    pickStyle = (game.bet.status === 'PUSH') 
+      ? 'grey'
+      : (game.bet.status === 'WIN') 
+        ? 'green'
+        : 'red';
+    resultStr = game.bet.units + ' Unit ' + game.bet.status;
+
+    pickStr = (game.spread === 0)
+      ? game.bet.team + ' PK'
+      : formatActionPickStr(game);
   }
 
   return (
@@ -70,14 +58,14 @@ const FinalGame = (game) => {
       <div className="card-body">
         <div className="row">
           <div className="col-3">
-            <img className={"team-logo " + game.awayTeam.abbreviation} src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
+            <img className={"team-logo away " + game.awayTeam.abbreviation} src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
           </div>
           <div className="col-6">
             <p className="score-type h5toh4">Final Score</p>
             <p className="score-num">{game.score.away + ' - ' + game.score.home}</p>
           </div>
           <div className="col-3">
-            <img className={"team-logo " + game.homeTeam.abbreviation} src={homeLogoLink} loading="eager" alt={game.homeTeam.abbreviation}></img>
+            <img className={"team-logo home " + game.homeTeam.abbreviation} src={homeLogoLink} loading="eager" alt={game.homeTeam.abbreviation}></img>
           </div>
         </div>
         <div className="row projected-row">
@@ -93,7 +81,7 @@ const FinalGame = (game) => {
         </div>
         <div className="row">
           <div className="col"><span className={"float-left spread line " + pickStyle}>{pickStr}</span></div>
-          <div className="col"><span className={"float-right spread pick " + pickStyle}>{pickResult}</span></div>
+          <div className="col"><span className={"float-right spread pick " + pickStyle}>{resultStr}</span></div>
         </div>
       </div>
     </div>
