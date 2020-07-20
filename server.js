@@ -1,5 +1,5 @@
-// import { mongoWebUser, mongoWebPW } from './config.js';
 
+require('dotenv').config();
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
@@ -11,6 +11,9 @@ const app = express();
 app.use(cors());
 const router = express.Router();
 
+app.set('port', process.env.PORT); 
+console.log("Running on port " + app.get('port'));
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
@@ -21,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 // this is our MongoDB database
 var MongoClient = require('mongodb').MongoClient;
 const dbRoute =
-  'mongodb+srv://web:NBAMachineLearning@nba-data.nftax.azure.mongodb.net/NBA_ML?retryWrites=true&w=majority';
+  'mongodb+srv://' + process.env.MONGO_WEB_USER + ':' + process.env.MONGO_WEB_PW + '@nba-data.nftax.azure.mongodb.net/NBA_ML?retryWrites=true&w=majority';
 
 // connects our back end code with the database
 MongoClient.connect(dbRoute, { useUnifiedTopology: true })
@@ -62,7 +65,7 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   // launch our backend into a port
   app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
-  db.close();
+  //db.close();
 })
 .catch(error => { 
   throw err 

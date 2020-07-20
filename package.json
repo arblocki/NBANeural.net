@@ -8,6 +8,7 @@
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.9",
     "morgan": "^1.10.0",
@@ -15,9 +16,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "concurrently \"node server.js\" \"cd client && npm start\"",
+    "start": "cd client && npm install && npm build && cd .. && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "azure": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm run start"
+    "azure": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install && npm run start"
   },
   "engines": {
     "node": "10.19.0"

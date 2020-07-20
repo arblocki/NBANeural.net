@@ -5,12 +5,6 @@ import Scoreboard from '../components/Scoreboard/Scoreboard.js';
 import './scores.css';
 import "react-datepicker/dist/react-datepicker.css";
 
-// const ButtonDateInput = ({ value, onClick }) => (
-//   <button className="btn date-selector" onClick={onClick}>
-//     {value}
-//   </button>
-// );
-
 
 class ScoresContainer extends Component {
 
