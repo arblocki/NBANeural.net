@@ -12,16 +12,16 @@ app.use(cors());
 const router = express.Router();
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/public'));
+  app.use(express.static('client/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
 // this is our MongoDB database
 var MongoClient = require('mongodb').MongoClient;
 const dbRoute =
-  'mongodb+srv://<username>:<password>@nba-data.nftax.azure.mongodb.net/NBA_ML?retryWrites=true&w=majority';
+  'mongodb+srv://web:NBAMachineLearning@nba-data.nftax.azure.mongodb.net/NBA_ML?retryWrites=true&w=majority';
 
 // connects our back end code with the database
 MongoClient.connect(dbRoute, { useUnifiedTopology: true })
