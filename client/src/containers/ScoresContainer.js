@@ -36,11 +36,11 @@ class ScoresContainer extends Component {
 
   getGames(date) {
     var dateStr = this.convertDate(date);
-    (window.location.href === '/') 
+    (window.location.href.includes('localhost')) 
     ? fetch('http://localhost:3000/api/getGames/' + dateStr)
       .then((data) => data.json())
       .then((res) => this.setState({ games: res.data, date: date }))
-    : fetch(window.location.href + 'api/getGames/' + dateStr)
+    : fetch('https://nbaneuralnet.herokuapp.com/api/getGames/' + dateStr)
         .then((data) => data.json())
         .then((res) => this.setState({ games: res.data, date: date }));
   }
@@ -54,7 +54,7 @@ class ScoresContainer extends Component {
 
     return (
       <div className="container">
-        <div className="row">
+        <div className="row" id="scores">
           <div className="col-7 col-md-10">
             <h2>Scores</h2>
           </div>

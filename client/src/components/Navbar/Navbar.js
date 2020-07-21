@@ -8,8 +8,8 @@ const Navbar = () => {
           <div className="collapse navbar-collapse"
             id="navcol-1">
             <ul className="nav navbar-nav">
-              <li className="nav-item" role="presentation"><a className="nav-link" href="#">Scores</a></li>
-              <li className="nav-item" role="presentation"><a className="nav-link" href="#">Model Performance</a></li>
+              <li className="nav-item" role="presentation"><a className="nav-link" href="#scores">Scores</a></li>
+              {/* <li className="nav-item" role="presentation"><a className="nav-link" href="">Model Performance</a></li> */}
             </ul>
           </div>
         </div>
