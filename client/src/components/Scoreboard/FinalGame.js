@@ -1,4 +1,4 @@
-import React from 'react';
+import React from './node_modules/react';
 
 const formatNeutralPickStr = (game) => {
   const pickStr = (game.spread < 0) 

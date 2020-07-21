@@ -1,5 +1,5 @@
 {
     "workbench.preferredDarkColorTheme": "Monokai",
-    "appService.defaultWebAppToDeploy": "/subscriptions/71202f88-e560-4068-983d-60b274e43c48/resourceGroups/NbaNeuralRG/providers/Microsoft.Web/sites/NBANeuralNet",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/71202f88-e560-4068-983d-60b274e43c48/resourceGroups/NBANeuralRG/providers/Microsoft.Web/sites/NBANeuralNet"
 }

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { Component } from './node_modules/react';
+import DatePicker from './node_modules/react-datepicker';
 import Scoreboard from '../components/Scoreboard/Scoreboard.js';
 
 import './scores.css';
-import "react-datepicker/dist/react-datepicker.css";
+import "./node_modules/react-datepicker/dist/react-datepicker.css";
 
 
 class ScoresContainer extends Component {
