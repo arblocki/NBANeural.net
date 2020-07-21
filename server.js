@@ -5,13 +5,13 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const path = require('path');
+const proxy = require('http-proxy-middleware');
 
-const API_PORT = 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.set('port', PORT); 
 console.log("Running on port " + app.get('port'));
@@ -57,12 +57,11 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   // append /api for our http requests
   app.use('/api', router);
 
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-  }
+  // For every other request, route to index.html
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
 
   // launch our backend into a port
   app.listen(PORT, () => console.log(`LISTENING ON PORT ${PORT}`));

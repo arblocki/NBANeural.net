@@ -36,7 +36,11 @@ class ScoresContainer extends Component {
 
   getGames(date) {
     var dateStr = this.convertDate(date);
-    fetch('http://localhost:3001/api/getGames/' + dateStr)
+    (window.location.href === '/') 
+    ? fetch('http://localhost:3000/api/getGames/' + dateStr)
+      .then((data) => data.json())
+      .then((res) => this.setState({ games: res.data, date: date }))
+    : fetch(window.location.href + 'api/getGames/' + dateStr)
         .then((data) => data.json())
         .then((res) => this.setState({ games: res.data, date: date }));
   }
