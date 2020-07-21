@@ -20,7 +20,7 @@
     "start": "node server.js",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "dev": "cd client && npm install && npm run build && cd .. && npm run start",
     "azure": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm run start",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },

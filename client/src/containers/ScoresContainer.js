@@ -64,6 +64,13 @@ class ScoresContainer extends Component {
               selected={this.state.date}
               onChange={date => this.getGames(date)}
               customInput={<ButtonDateInput />}
+              popperModifiers={{
+                preventOverflow: {
+                  enabled: true,
+                  escapeWithReference: false,
+                  boundariesElement: "viewport",
+                }
+              }}
             />
           </div>
         </div>
