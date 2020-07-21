@@ -11,15 +11,10 @@ const app = express();
 app.use(cors());
 const router = express.Router();
 
-app.set('port', process.env.PORT); 
-console.log("Running on port " + app.get('port'));
+const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+app.set('port', PORT); 
+console.log("Running on port " + app.get('port'));
 
 // this is our MongoDB database
 var MongoClient = require('mongodb').MongoClient;
@@ -34,7 +29,7 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
 
   // (optional) only made for logging and
   // bodyParser, parses the request body to be a readable json format
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(logger('dev'));
 
@@ -62,10 +57,17 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   // append /api for our http requests
   app.use('/api', router);
 
-  // launch our backend into a port
-  app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
 
-  //db.close();
+  // launch our backend into a port
+  app.listen(PORT, () => console.log(`LISTENING ON PORT ${PORT}`));
+
+  db.close();
 })
 .catch(error => { 
   throw err 
