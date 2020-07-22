@@ -54,7 +54,7 @@ const FinalGame = (game) => {
   }
 
   return (
-    <div className="card border-dark d-inline-flex scorecard">
+    <div className="card border-dark d-inline-flex scorecard" key={game.gameID}>
       <div className="card-body">
         <div className="row">
           <div className="col-3">

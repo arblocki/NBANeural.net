@@ -15,7 +15,7 @@ const PageHeader = () => {
               <h5 className="mb-0">2019-2020 Record ATS</h5>
             </div>
             <div className="card-body">
-              <h1 className="text-center record">93-74-7</h1>
+              <h1 className="text-center record">127-94-9</h1>
             </div>
           </div>
         </div>

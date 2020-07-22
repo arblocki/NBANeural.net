@@ -14,6 +14,9 @@ class ScoresContainer extends Component {
       games: [],
       date: new Date(),
     };
+
+    // this.handlePrevDayClick = this.handlePrevDayClick.bind(this);
+    // this.handleNextDayClick = this.handleNextDayClick.bind(this);
   }
 
   componentDidMount() {
@@ -34,13 +37,21 @@ class ScoresContainer extends Component {
     return dateStr;
   }
 
+  // handlePrevDayClick(date) {
+  //   this.state.date.setDate(this.state.date.getDate() - 1);
+  // }
+
+  // handleNextDayClick() {
+  //   this.setState({ date: this.state.date.setDate(this.state.date.getDate + 1) });
+  // }
+
   getGames(date) {
     var dateStr = this.convertDate(date);
     (window.location.href.includes('localhost'))
     ? fetch('http://localhost:3001/api/getGames/' + dateStr)
       .then((data) => data.json())
       .then((res) => this.setState({ games: res.data, date: date }))
-    : fetch('https://www.nbaneural.net/api/getGames/' + dateStr)
+    : fetch('https://nbaneuralnet.herokuapp.com/api/getGames/' + dateStr)
         .then((data) => data.json())
         .then((res) => this.setState({ games: res.data, date: date }));
   }
@@ -59,6 +70,9 @@ class ScoresContainer extends Component {
             <h2>Scores</h2>
           </div>
           <div className='col-5 col-md-2'>
+            {/* <button className="btn" onClick={this.handlePrevDayClick}>
+              {'<<'}
+            </button> */}
             <DatePicker
               todayButton="Today"
               selected={this.state.date}
@@ -71,7 +85,11 @@ class ScoresContainer extends Component {
                   boundariesElement: "viewport",
                 }
               }}
+              showMonthDropdown
             />
+            {/* <button className="btn" onClick={this.handleNextDayClick}>
+              {'>>'}
+            </button> */}
           </div>
         </div>
         {this.state.games.length === 0

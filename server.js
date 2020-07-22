@@ -57,7 +57,7 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   app.use('/api', router);
 
   if (process.env.NODE_ENV === 'production') {
-    // For every other request, route to index.html 
+    // When running in prod, send to production build 
     app.use(express.static('client/build'));
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
