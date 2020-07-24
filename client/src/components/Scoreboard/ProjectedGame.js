@@ -48,6 +48,8 @@ const ProjectedGame = (game) => {
       : formatActionPickStr(game);
   }
 
+  const startTime = new Date(game.startTime)
+
   return (
     <div className="card border-dark d-inline-flex scorecard" key={game.gameID}>
       <div className="card-body">
@@ -55,7 +57,8 @@ const ProjectedGame = (game) => {
           <div className="col-3">
             <img className={"team-logo away " + game.awayTeam.abbreviation} src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
           </div>
-          <div className="col-6">
+          <div className="col-6 proj-score">
+            <center><p className="startTime">{startTime.toLocaleTimeString([], {timeStyle: 'short'})}</p></center>
             <p className="score-type h5toh4">Projected Score</p>
             <p className="score-num">{game.predScore.away.toFixed(1) + ' - ' + game.predScore.home.toFixed(1)}</p>
           </div>
@@ -65,7 +68,8 @@ const ProjectedGame = (game) => {
         </div>
         <div>
           <span className={"float-left spread line " + pickStyle}>{pickStr}</span>
-          <span className={"float-right spread pick " + pickStyle}>{unitStr}</span></div>
+          <span className={"float-right spread pick " + pickStyle}>{unitStr}</span>
+        </div>
       </div>
     </div>
   )

@@ -5,6 +5,13 @@ import Scoreboard from '../components/Scoreboard/Scoreboard.js';
 import './scores.css';
 import "react-datepicker/dist/react-datepicker.css";
 
+const FutureDateAlert = () => {
+  return (
+    <div className="alert alert-dark" role="alert">
+      Projections and spreads will be available on the day of the games.
+    </div>
+  );
+}
 
 class ScoresContainer extends Component {
 
@@ -37,14 +44,6 @@ class ScoresContainer extends Component {
     return dateStr;
   }
 
-  // handlePrevDayClick(date) {
-  //   this.state.date.setDate(this.state.date.getDate() - 1);
-  // }
-
-  // handleNextDayClick() {
-  //   this.setState({ date: this.state.date.setDate(this.state.date.getDate + 1) });
-  // }
-
   getGames(date) {
     var dateStr = this.convertDate(date);
     (window.location.href.includes('localhost'))
@@ -70,9 +69,6 @@ class ScoresContainer extends Component {
             <h2>Scores</h2>
           </div>
           <div className='col-5 col-md-2'>
-            {/* <button className="btn" onClick={this.handlePrevDayClick}>
-              {'<<'}
-            </button> */}
             <DatePicker
               todayButton="Today"
               selected={this.state.date}
@@ -87,14 +83,13 @@ class ScoresContainer extends Component {
               }}
               showMonthDropdown
             />
-            {/* <button className="btn" onClick={this.handleNextDayClick}>
-              {'>>'}
-            </button> */}
           </div>
         </div>
+        {this.state.games.length !== 0 && this.state.games[0].predScore.away === -1
+          ? FutureDateAlert() : null}
         {this.state.games.length === 0
-            ? <center><h4 className='no-games grey'>No games on this date!</h4></center>
-            : <Scoreboard games={this.state.games}/>}
+          ? <center><h4 className='no-games grey'>No games on this date!</h4></center>
+          : <Scoreboard games={this.state.games}/>}
       </div>
     );
   }

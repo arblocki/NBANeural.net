@@ -37,8 +37,14 @@
   margin-bottom: .5rem;
   font-weight: 500;
   line-height: 1.2;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   text-align: center!important;
+}
+
+@media (min-width: 450px) {
+  .h5toh4 {
+    font-size: 1.25rem;
+  }
 }
 
 @media (min-width: 992px) {
@@ -52,21 +58,27 @@
   margin-bottom: .5rem;
   font-weight: 500;
   line-height: 1.2;
-  font-size: 1.75rem;
+  font-size: 1.2rem;
   text-align: center!important;
+}
+
+@media (min-width: 450px) {
+  .score-num {
+    font-size: 1.5rem;
+  }
 }
 
 @media (min-width: 992px) {
   .score-num {
-    font-size: 2.5rem;
+    font-size: 1.9rem;
   }
 }
 
-/* @media (min-width: 992px) {
-  .team-logo {
-    height: 150px;
+@media (min-width: 1200px) {
+  .score-num {
+    font-size: 2.2rem;
   }
-} */
+}
 
 .float-left.spread {
   margin-left: 4%;
@@ -141,4 +153,12 @@
 
 .no-games {
   margin-top: 65px;
+}
+
+.proj-score {
+  padding: 0;
+}
+
+.startTime {
+  margin-bottom: 0.2rem;
 }
