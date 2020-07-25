@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from './Logo.js';
 
 const formatNeutralPickStr = (game) => {
   const pickStr = (game.spread < 0) 
@@ -26,9 +27,6 @@ const formatActionPickStr = (game) => {
 }
 
 const FinalGame = (game) => {
-  
-  const awayLogoLink = '/logos/' + game.awayTeam.abbreviation + '.svg';
-  const homeLogoLink = '/logos/' + game.homeTeam.abbreviation + '.svg';
 
   var pickStyle = '';
   var resultStr = '';
@@ -58,14 +56,14 @@ const FinalGame = (game) => {
       <div className="card-body">
         <div className="row">
           <div className="col-3">
-            <img className={"team-logo away " + game.awayTeam.abbreviation} src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
+            {Logo(game.awayTeam.abbreviation, 'away')}
           </div>
           <div className="col-6">
             <p className="score-type h5toh4">Final Score</p>
             <p className="score-num">{game.score.away + ' - ' + game.score.home}</p>
           </div>
           <div className="col-3">
-            <img className={"team-logo home " + game.homeTeam.abbreviation} src={homeLogoLink} loading="eager" alt={game.homeTeam.abbreviation}></img>
+            {Logo(game.homeTeam.abbreviation, 'home')}
           </div>
         </div>
         <div className="row projected-row">

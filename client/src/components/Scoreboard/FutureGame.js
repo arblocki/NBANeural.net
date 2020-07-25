@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from './Logo.js';
 
 const formatNeutralPickStr = (game) => {
   var pickStr = (game.spread < 0) 
@@ -37,14 +38,14 @@ const FutureGame = (game) => {
       <div className="card-body">
         <div className="row">
           <div className="col-3">
-            <img className={"team-logo away " + game.awayTeam.abbreviation} src={awayLogoLink} loading="eager" alt={game.awayTeam.abbreviation}></img>
+            {Logo(game.awayTeam.abbreviation, 'away')}
           </div>
           <div className="col-6 proj-score">
             <center><p className="startTime">{startTime.toLocaleTimeString([], {timeStyle: 'short'})}</p></center>
             <p className="score-num">{game.awayTeam.abbreviation + ' - ' + game.homeTeam.abbreviation}</p>
           </div>
           <div className="col-3">
-          <img className={"team-logo home " + game.homeTeam.abbreviation} src={homeLogoLink} loading="eager" alt={game.homeTeam.abbreviation}></img>
+            {Logo(game.homeTeam.abbreviation, 'home')}
           </div>
         </div>
       </div>
