@@ -27,9 +27,6 @@ const formatActionPickStr = (game) => {
 }
 
 const FutureGame = (game) => {
-  
-  const awayLogoLink = '/logos/' + game.awayTeam.abbreviation + '.svg';
-  const homeLogoLink = '/logos/' + game.homeTeam.abbreviation + '.svg';
 
   const startTime = new Date(game.startTime)
 

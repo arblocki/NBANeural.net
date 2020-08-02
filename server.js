@@ -11,6 +11,7 @@ app.use(cors());
 const router = express.Router();
 
 const API_PORT = process.env.PORT || 3001;
+const isDevelopment = (process.env.NODE_ENV === 'development');
 
 app.set('port', API_PORT); 
 console.log("Running on port " + app.get('port'));
@@ -36,19 +37,30 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   router.get('/getAllGames', (req, res) => {
     dbo.collection('games').find().toArray(function(err, result) {
       if (err) return res.json({ success: false, error: err });
-      console.log(result.length + ' games received');
+      if (isDevelopment) { console.log(result.length + ' games received') }
       return res.json({ success: true, data: result })
     });
   });
 
   // Fetch games for a certain date 
   router.get('/getGames/:date', (req, res) => {
-    console.log(req.params);
+    if (isDevelopment) { console.log(req.params) }
     dateStr = req.params.date;
     query = { date: dateStr };
     dbo.collection('games').find(query).toArray(function(err, result) {
       if (err) return res.json({ success: false, error: err });
-      console.log(result.length + ' games received');
+      if (isDevelopment) { console.log(result.length + ' games received') }
+      return res.json({ success: true, data: result })
+    });
+  });
+
+  // Fetch record 
+  router.get('/getRecord', (req, res) => {
+    dbo.collection('record').find().toArray(function(err, result) {
+      if (err) return res.json({ success: false, error: err });
+      if (isDevelopment) { 
+        console.log('Record rec\'d: ' + result[0].wins + '-' + result[0].losses + '-' + result[0].pushes); 
+      }
       return res.json({ success: true, data: result })
     });
   });

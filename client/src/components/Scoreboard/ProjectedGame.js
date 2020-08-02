@@ -27,9 +27,6 @@ const formatActionPickStr = (game) => {
 }
 
 const ProjectedGame = (game) => {
-  
-  const awayLogoLink = '/logos/' + game.awayTeam.abbreviation + '.svg';
-  const homeLogoLink = '/logos/' + game.homeTeam.abbreviation + '.svg';
 
   var pickStyle = '';
   var unitStr = '';
