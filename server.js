@@ -11,7 +11,7 @@ app.use(cors());
 const router = express.Router();
 
 const API_PORT = process.env.PORT || 3001;
-const isDevelopment = (process.env.NODE_ENV === 'development');
+const isProd = (process.env.NODE_ENV === 'production');
 
 app.set('port', API_PORT); 
 console.log("Running on port " + app.get('port'));
@@ -37,19 +37,20 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   router.get('/getAllGames', (req, res) => {
     dbo.collection('games').find().toArray(function(err, result) {
       if (err) return res.json({ success: false, error: err });
-      if (isDevelopment) { console.log(result.length + ' games received') }
+      if (!isProd) { console.log(result.length + ' games received') }
       return res.json({ success: true, data: result })
     });
   });
 
   // Fetch games for a certain date 
   router.get('/getGames/:date', (req, res) => {
-    if (isDevelopment) { console.log(req.params) }
+    if (!isProd) { console.log(req.params) }
     dateStr = req.params.date;
     query = { date: dateStr };
-    dbo.collection('games').find(query).toArray(function(err, result) {
+    sortByTip = { startTime: 1 }
+    dbo.collection('games').find(query).sort(sortByTip).toArray(function(err, result) {
       if (err) return res.json({ success: false, error: err });
-      if (isDevelopment) { console.log(result.length + ' games received') }
+      if (!isProd) { console.log(result.length + ' games received') }
       return res.json({ success: true, data: result })
     });
   });
@@ -58,7 +59,7 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   router.get('/getRecord', (req, res) => {
     dbo.collection('record').find().toArray(function(err, result) {
       if (err) return res.json({ success: false, error: err });
-      if (isDevelopment) { 
+      if (!isProd) { 
         console.log('Record rec\'d: ' + result[0].wins + '-' + result[0].losses + '-' + result[0].pushes); 
       }
       return res.json({ success: true, data: result })
@@ -68,7 +69,7 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
   // append /api for our http requests
   app.use('/api', router);
 
-  if (process.env.NODE_ENV === 'production') {
+  if (isProd) {
     // When running in prod, send to production build 
     app.use(express.static('client/build'));
     app.get('*', (req, res) => {
