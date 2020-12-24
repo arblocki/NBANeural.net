@@ -57,7 +57,8 @@ MongoClient.connect(dbRoute, { useUnifiedTopology: true })
 
   // Fetch record 
   router.get('/getRecord', (req, res) => {
-    dbo.collection('record').find().toArray(function(err, result) {
+    query = { season: '2020-2021' };
+    dbo.collection('record').find(query).toArray(function(err, result) {
       if (err) return res.json({ success: false, error: err });
       if (!isProd) { 
         console.log('Record rec\'d: ' + result[0].wins + '-' + result[0].losses + '-' + result[0].pushes); 

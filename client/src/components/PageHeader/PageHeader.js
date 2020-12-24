@@ -35,7 +35,7 @@ class PageHeader extends Component {
           <div className="col-sm-12 col-md-4 record-col">
             <div className="card border-dark">
               <div className="card-header">
-                <h5 className="mb-0">2019-2020 Record ATS</h5>
+                <h5 className="mb-0">2020-2021 Record ATS</h5>
               </div>
               <div className="card-body">
                 <h1 className="text-center record">{this.state.record}</h1>
